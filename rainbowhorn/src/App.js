@@ -18,9 +18,8 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
       showAdminBoard: false,
-      currentUser: undefined,
+      currentUser: undefined
     };
   }
 
@@ -30,8 +29,7 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        showAdminBoard: user.role==="ADMIN"
       });
     }
   }
@@ -39,14 +37,13 @@ class App extends Component {
   logOut() {
     AuthService.logout();
     this.setState({
-      showModeratorBoard: false,
       showAdminBoard: false,
-      currentUser: undefined,
+      currentUser: undefined
     });
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+    const { currentUser, showAdminBoard } = this.state;
 
     return (
       <div>
@@ -60,14 +57,6 @@ class App extends Component {
                 Home
               </Link>
             </li>
-
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
 
             {showAdminBoard && (
               <li className="nav-item">
