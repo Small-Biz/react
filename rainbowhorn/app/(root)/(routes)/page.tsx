@@ -1,5 +1,6 @@
 "use client";
 
+import { StoreModal } from '@/components/modals/store-modal';
 import { useStoreModal } from '@/hooks/use-store-modal';
 import { useEffect } from 'react';
 
@@ -16,7 +17,12 @@ useEffect(()=>{
   }
 }, [isOpen, onOpen]);
 
-  return null;
+  return (
+    <div className='p-4'>
+      Root Page
+    </div>
+
+  )
 }
 
 export default SetupPage;

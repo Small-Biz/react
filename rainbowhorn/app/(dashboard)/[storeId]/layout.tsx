@@ -1,5 +1,5 @@
-import prismadb from "@/lib/prismadb";
 import {auth} from "@clerk/nextjs";
+import axios from "axios";
 import {redirect} from "next/navigation";
 
 export default async function DashboardLayout({
@@ -16,14 +16,10 @@ export default async function DashboardLayout({
         redirect('/sign-in');
     }
 
-    const store = false;/*await prismadb.store.findFirst({
-        where:{
-            id: params.storeId,
-            userId
-        }
-    })
-*/
-    if ( !store){
+    const response = await axios.get('http://localhost:8090/admin/store');
+    const store = response.data.store;
+
+    if (!store){
         redirect('/');
     }
 
