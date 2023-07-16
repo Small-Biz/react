@@ -19,7 +19,7 @@ const SettingPage:React.FC<SettingsPageProps>=async ({
         redirect('/sign-in');
     }
 
-    const response= await axios.get('http://localhost:8090/admin/store');//+storeId);
+    const response= await axios.get(`http://localhost:8090/admin/stores/${params.storeId}`);
 
     if (!response){
         redirect('/');

@@ -14,7 +14,7 @@ const DashboardPage:React.FC<DashboardPageProps>=({
     const [store,setStore] = useState(null);
 
     if (!store){
-        axios.get('http://localhost:8090/admin/store')///'+params.storeId)
+        axios.get(`http://localhost:8090/admin/stores/${params.storeId}`)
         .then( function(response){
             setStore(response.data.store);
         })
