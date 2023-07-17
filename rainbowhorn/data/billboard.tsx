@@ -5,8 +5,8 @@ type Billboard={
     storeId: string;
     label: string;
     imageUrl: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: number;
+    updatedAt: number;
 }   
 
 export default Billboard;
