@@ -17,6 +17,8 @@ export default async function SetupLayout({
         redirect('/sign-in');
     }
 
+    
+
     const response = await axios.get('http://localhost:8090/admin/store');
     const store = response.data.store;
 
