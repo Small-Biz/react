@@ -27,6 +27,7 @@ const formSchema = z.object({
     price: z.coerce.number().min(1),
     categoryId: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
+    status: z.string().min(1),
 })
 
 interface ProductFormProps{
@@ -68,6 +69,7 @@ export const ProductForm:React.FC<ProductFormProps>=({
             price: 0,
             categoryId: '',
             isFeatured: false,
+            status: 'PENDING'
         }
     });
 
@@ -155,6 +157,20 @@ export const ProductForm:React.FC<ProductFormProps>=({
 
                         <FormField
                             control={form.control}
+                            name="description"
+                            render={({ field })=>(
+                                <FormItem>
+                                    <FormLabel>Description</FormLabel>
+                                    <FormControl>
+                                        <Input disabled={loading} placeholder="Description" {...field}/>
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}                            
+                        />
+
+                        <FormField
+                            control={form.control}
                             name="price"
                             render={({ field })=>(
                                 <FormItem>
@@ -223,6 +239,38 @@ export const ProductForm:React.FC<ProductFormProps>=({
                                             This product will appear on the home page
                                         </FormDescription>
                                     </div>
+                                </FormItem>
+                            )}                            
+                        />
+
+                        <FormField
+                            control={form.control}
+                            name="status"
+                            render={({ field })=>(
+                                <FormItem>
+                                    <FormLabel>Status</FormLabel>
+                                    <Select
+                                        disabled={loading}
+                                        onValueChange={field.onChange}
+                                        value={field.value}
+                                        defaultValue={field.value}
+                                    >
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue
+                                                defaultValue={field.value}
+                                                placeholder={"Select a status"}
+                                                />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem key="PENDING" value="PENDING">Pending</SelectItem>
+                                            <SelectItem key="PUBLISHED" value="PUBLISHED">Published</SelectItem>
+                                            <SelectItem key="LOCKED" value="LOCKED">Locked</SelectItem>
+                                            <SelectItem key="DELETED" value="DELETED">Deleted</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage/>
                                 </FormItem>
                             )}                            
                         />
