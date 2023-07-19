@@ -23,7 +23,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 const formSchema = z.object({
     name: z.string().min(1),
     description: z.string().min(1),
-    images: z.object({url: z.string()}).array(),
     price: z.coerce.number().min(1),
     categoryId: z.string().min(1),
     isFeatured: z.boolean().default(false).optional(),
@@ -65,7 +64,6 @@ export const ProductForm:React.FC<ProductFormProps>=({
         } : {
             name: '',
             description: '',
-            images: [],
             price: 0,
             categoryId: '',
             isFeatured: false,
@@ -78,7 +76,11 @@ export const ProductForm:React.FC<ProductFormProps>=({
         try{
             setLoading(true);
             if (initialData){
-                const response=await axios.patch(`http://localhost:8090/admin/${params.storeId}/products/${params.productId}`,data);
+                const newData={
+                    ...data,
+                    id: params.productId
+                }
+                const response=await axios.patch(`http://localhost:8090/admin/${params.storeId}/products/${params.productId}`,newData);
             }else{
                 const response=await axios.post(`http://localhost:8090/admin/${params.storeId}/products`,data);
             }
