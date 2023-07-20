@@ -45,8 +45,4 @@ export const columns: ColumnDef<OrderColumn>[] = [
     accessorKey: "updatedAt",
     header: "Last Updated Time",
   },
-  {
-    id: "action",
-    cell: ({row}) => <CellAction data={row.original}/>
-  },
 ]
