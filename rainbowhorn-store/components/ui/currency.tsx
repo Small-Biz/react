@@ -1,0 +1,35 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+const formatter = new Intl.NumberFormat("en-GB",{
+    style: 'currency',
+    currency: 'GBP'
+  });
+
+interface CurrencyProps{
+    value?: string | number;
+}
+
+const Currency: React.FC<CurrencyProps> = ({
+    value
+}) => {
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() =>{
+        setIsMounted(true);
+    }, []);
+
+    if (!isMounted){
+        return null;
+    }
+
+    return (
+        <div>
+                {formatter.format(Number(value))}
+        </div>
+    )
+}
+
+export default Currency;
