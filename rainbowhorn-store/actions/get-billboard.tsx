@@ -1,7 +1,7 @@
 import { Billboard } from "@/types";
 import axios from "axios";
 
-const URL = `http://localhost:8090/admin/billboards`;
+const URL = `http://localhost:8090/api/billboards`;
 
 const getBillboard = async (id: string): Promise<Billboard> => {
 

@@ -12,7 +12,7 @@ export interface Category{
 
 export interface Product{
     id: string;
-    category: string;
+    categoryId: string;
     name: string;
     imageList: Image[];
     price: string;    
