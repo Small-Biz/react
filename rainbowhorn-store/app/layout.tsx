@@ -2,6 +2,8 @@ import Footer from '@/components/footer'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Urbanist } from 'next/font/google'
+import ModalProvider from '@/providers/modal-provider'
+import { ToastProvider } from '@/providers/toast-provider'
 import Navbar from '@/components/nav-bar'
 
 const inter = Urbanist({ subsets: ['latin'] })
@@ -19,6 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ModalProvider/>
+        <ToastProvider/>
         <Navbar/>
         {children}
         <Footer/>
