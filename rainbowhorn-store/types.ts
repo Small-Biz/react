@@ -14,6 +14,7 @@ export interface Product{
     id: string;
     categoryId: string;
     name: string;
+    description: string;
     imageList: Image[];
     price: string;    
     isFeatured: boolean;
