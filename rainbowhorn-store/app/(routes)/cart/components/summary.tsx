@@ -2,7 +2,7 @@
 
 import axios from "axios"
 import {useEffect} from "react"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "react-hot-toast"
 
 import Button from "@/components/ui/button"
@@ -13,19 +13,44 @@ import useCart from "@/hooks/use-cart"
 
 const Summary = () =>{
 
+    const router=useRouter();
     const searchParams = useSearchParams();
     const items = useCart((state) => state.items);
     const removeAll = useCart((state) => state.removeAll);
+
+    useEffect(() => {
+        if ( searchParams.get("success")){
+            toast.success("Payment completed");
+            removeAll();
+        }
+        if ( searchParams.get("cancelled")){
+            toast.error("Something went wrong.");
+        }
+    }), [searchParams, removeAll];
 
     const totalPrice = items.reduce((total, item) => {
         return total + Number(item.price);
     }, 0);
 
     const onCheckout = async () => {
-        const response = await axios.post('http://localhost:8090/api/checkout')
-    }
+        console.log("rayTest onCheckout");
 
-    
+        
+        try{
+            const response = await axios.post('http://localhost:8090/api/paymentintent', {
+                productId: items.map((item) => item.id),
+                totalAmount: 1099.99,
+                featureRequest: "This is featureRequst"
+            });
+            
+            const stripeSecret=response.data.stripeSecret;
+
+            //window.location = response.data.url;
+            router.push(`/checkout?stripeSecret=${stripeSecret}`);
+        }catch(error){
+            toast.error("Something went wrong.");
+        }
+    }
 
     return (
         <div className="
@@ -50,7 +75,7 @@ const Summary = () =>{
                     <Currency value={totalPrice}/>
                 </div>
             </div>
-            <Button className="w-full mt-6">
+            <Button onClick={onCheckout} className="w-full mt-6">
                 Checkout
             </Button>
         </div>
