@@ -6,6 +6,7 @@ import CheckoutForm from "./components/checkout-form";
 import getPaymentIntent from "@/actions/get-payment-intent";
 import { useParams, useSearchParams } from "next/navigation";
 import qs from "query-string"
+import Container from "@/components/ui/container";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -23,12 +24,14 @@ const CheckoutPage = async () =>{
         clientSecret: current?.stripeSecret,
     };
 
+    console.log(options);
+
     return (
-        <div>
+        <Container>
             <Elements stripe={stripePromise} options={options}>
                 <CheckoutForm />
             </Elements>
-        </div>
+        </Container>
     )
 }
 

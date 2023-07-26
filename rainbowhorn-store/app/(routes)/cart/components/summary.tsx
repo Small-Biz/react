@@ -33,19 +33,27 @@ const Summary = () =>{
     }, 0);
 
     const onCheckout = async () => {
-        console.log("rayTest onCheckout");
 
-        
+        const cartItemList = items.map((item)=>{
+            return {
+                productId: item.id,
+                price: item.price,
+                quantity: 1
+            }
+        })
+
         try{
             const response = await axios.post('http://localhost:8090/api/paymentintent', {
-                productId: items.map((item) => item.id),
-                totalAmount: 1099.99,
-                featureRequest: "This is featureRequst"
+                storeId: "17",
+                userId: "1",
+                itemList: cartItemList,
+                totalAmount: totalPrice,
             });
             
             const stripeSecret=response.data.stripeSecret;
 
             //window.location = response.data.url;
+            //router.push(`/checkout?stripeSecret=${stripeSecret}`);
             router.push(`/checkout?stripeSecret=${stripeSecret}`);
         }catch(error){
             toast.error("Something went wrong.");
