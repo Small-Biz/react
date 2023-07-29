@@ -14,15 +14,15 @@ const OrdersPage= async({
     const response=await axios.get(`http://localhost:8090/admin/${params.storeId}/orders`);
     const orders=response.data.orderList;
 
-    const formattedOrders:OrderColumn[] = orders.map((item:Order)=>({
-        id: item.id,
-        userId: item.userId,
-        phone: item.phone,
-        products: item.orderItems.map((item)=> item.productName).join(', '),
-        totalAmount: formatter.format(item.totalAmount),        
-        status: item.status,
-        createdAt: format(item.createdAt, "MMMM do, yyyy"),
-        updatedAt: format(item.updatedAt, "MMMM do, yyyy")
+    const formattedOrders:OrderColumn[] = orders.map((order:Order)=>({
+        id: order.id,
+        userId: order.userId,
+        phone: order.phone,
+        products: order.orderItemList?.map((item)=> item.productName).join(', '),
+        totalAmount: formatter.format(order.totalAmount),        
+        status: order.status,
+        createdAt: format(order.createdAt, "MMMM do, yyyy"),
+        updatedAt: format(order.updatedAt, "MMMM do, yyyy")
     }));
 
 
