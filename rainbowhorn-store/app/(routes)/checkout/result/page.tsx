@@ -9,18 +9,17 @@ const CheckoutResultPage = () => {
 
     const searchParams=useSearchParams();
     const current = qs.parse(searchParams.toString());
+    const removeAll = useCart((state) => state.removeAll);
 
     // if (!current){
     //     return null;
     // }
 
-    //FIXME
     console.log('fetch');
     fetch(`http://localhost:8090/api/confirmpayment?referenceId=`+ current['payment_intent'])
     //const result = await confirmPayment();
 
-    //const cart=useCart();
-    //cart.removeAll();
+    removeAll();
 
     return (
         <div>

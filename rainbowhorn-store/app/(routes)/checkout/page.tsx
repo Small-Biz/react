@@ -3,7 +3,6 @@
 import { Elements } from "@stripe/react-stripe-js";
 import {loadStripe} from '@stripe/stripe-js';
 import CheckoutForm from "./components/checkout-form";
-import getPaymentIntent from "@/actions/get-payment-intent";
 import { useParams, useSearchParams } from "next/navigation";
 import qs from "query-string"
 import Container from "@/components/ui/container";
