@@ -5,17 +5,19 @@ import confirmPayment from "@/actions/confirm-payment";
 import useCart from "@/hooks/use-cart";
 import { useSearchParams } from "next/navigation";
 
-const CheckoutResultPage = async () => {
+const CheckoutResultPage = () => {
 
     const searchParams=useSearchParams();
     const current = qs.parse(searchParams.toString());
 
-    if (!current){
-        return null;
-    }
+    // if (!current){
+    //     return null;
+    // }
 
     //FIXME
-    const result = await confirmPayment(current['payment_intent']);
+    console.log('fetch');
+    fetch(`http://localhost:8090/api/confirmpayment?referenceId=`+ current['payment_intent'])
+    //const result = await confirmPayment();
 
     //const cart=useCart();
     //cart.removeAll();
