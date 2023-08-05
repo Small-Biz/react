@@ -9,6 +9,9 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { Order } from "@/types";
+import OrderItem from "./components/order-item";
+import Summary from "./components/summary";
 
 const formSchema = z.object({
     email: z.string().min(1, { message: "This field has to be filled." })
@@ -25,7 +28,8 @@ const OrderPage = () => {
     const [loading,setLoading] = useState(false);
     const [showDetails,setShowDetails] = useState(false);
     const [showError,setShowError] = useState(false);
-
+    const [order,setOrder] = useState(null);
+    
     const form=useForm<OrderFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,6 +46,8 @@ const OrderPage = () => {
 
         try{
             const response=await axios.get(`http://localhost:8090/api/orders/${data.orderId}?email=${data.email}`);
+            setOrder(response.data.order);
+            setShowDetails(true);
         }catch(error){
             console.log('error');
             setShowError(true);
@@ -50,7 +56,28 @@ const OrderPage = () => {
     }
 
     return (
+
         <Container>
+            {showDetails&&(
+            <div className="px-4 py-16 sm:px-6 lg:px-8">
+                <h1 className="text-3xl font-bold text-black">Order Details</h1>
+                <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
+                    <div className="lg:col-span-7">
+                        {order?.orderItemList.length===0 && <p className="text-neutral-500">No items in the order</p>}
+                        <ul>
+                            {order?.orderItemList.map((item)=>(
+                                <OrderItem
+                                    key={item.id}
+                                    data={item}
+                                />
+                            ))}
+                        </ul>
+                    </div>
+                    <Summary order={order}/>
+                </div>
+            </div>
+            )}
+
             <div className="p-4 sm:p-6 lg:p-8 overflow-hidden order-solid">
                 <div  className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover">
                     <div className="h-full w-full flex flex-col justify-center items-center gap-y-8">
