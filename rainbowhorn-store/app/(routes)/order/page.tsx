@@ -12,6 +12,7 @@ import axios from "axios";
 import { Order } from "@/types";
 import OrderItem from "./components/order-item";
 import Summary from "./components/summary";
+import OrderStepper from "@/components/ui/order-stepper";
 
 const formSchema = z.object({
     email: z.string().min(1, { message: "This field has to be filled." })
@@ -28,7 +29,7 @@ const OrderPage = () => {
     const [loading,setLoading] = useState(false);
     const [showDetails,setShowDetails] = useState(false);
     const [showError,setShowError] = useState(false);
-    const [order,setOrder] = useState(null);
+    const [order,setOrder] = useState<Order|undefined>(undefined);
     
     const form=useForm<OrderFormValues>({
         resolver: zodResolver(formSchema),
@@ -58,14 +59,15 @@ const OrderPage = () => {
     return (
 
         <Container>
-            {showDetails&&(
+            {showDetails&&order&&(
             <div className="px-4 py-16 sm:px-6 lg:px-8">
                 <h1 className="text-3xl font-bold text-black">Order Details</h1>
+                <OrderStepper orderStatus={order.status}/>
                 <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
                     <div className="lg:col-span-7">
-                        {order?.orderItemList.length===0 && <p className="text-neutral-500">No items in the order</p>}
+                        {order.orderItemList.length===0 && <p className="text-neutral-500">No items in the order</p>}
                         <ul>
-                            {order?.orderItemList.map((item)=>(
+                            {order.orderItemList.map((item)=>(
                                 <OrderItem
                                     key={item.id}
                                     data={item}
@@ -75,7 +77,34 @@ const OrderPage = () => {
                     </div>
                     <Summary order={order}/>
                 </div>
+                <div className="
+                    mt-6
+                    rounded=lg
+                    bg-gray-50
+                    px-4
+                    py-6
+                    sm:p-6
+                    lg:col-span-5
+                    lg:mt-10
+                    lg:p-8
+                    ">
+                    <div className="text-center">
+                        <h2 className="text-lg font-medium text-gray-900">
+                            Disclaimer                    
+                        </h2>
+                        <span className="text-xs">
+                        The information contained in this website is for general information purposes only. The information is provided by Rainbowhorn and while we endeavour to keep the information up to date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.
+
+In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this website.
+
+Through this website you are able to link to other websites which are not under the control of Rainbowhorn. We have no control over the nature, content and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.
+
+Every effort is made to keep the website up and running smoothly. However, Rainbowhorn takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.
+                        </span>
+                    </div>
+
             </div>
+            </div> 
             )}
 
             <div className="p-4 sm:p-6 lg:p-8 overflow-hidden order-solid">

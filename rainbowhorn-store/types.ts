@@ -47,6 +47,8 @@ export interface OrderItem{
     id:string;
     productId: string;
     productName: string;
+    description: string;
+    thumbnailUrl:string;
     price: number;
     quantity: number;
     netAmount: number;
