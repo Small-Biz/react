@@ -42,7 +42,7 @@ const OrderPage = () => {
     const onSubmit=async (data:OrderFormValues)=>{
         //submit email,orderId to get order details
         console.log('submit  ' + data.email + ' ' + data.orderId);
-
+        setOrder(undefined);
         setShowError(false);
 
         try{
