@@ -4,6 +4,7 @@ type Product={
     categoryId: string,
     name: string,
     description: string,
+    images:[],
     price: number,
     stock: number,
     isFeatured: boolean,

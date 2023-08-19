@@ -19,9 +19,11 @@ import { Separator } from "@/components/ui/separator";
 import Product from "@/data/product";
 import Category from "@/data/category";
 import { Checkbox } from "@/components/ui/checkbox";
+import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
     name: z.string().min(1),
+    images: z.object({url: z.string()}).array(),
     description: z.string().min(1),
     price: z.coerce.number().min(1),
     categoryId: z.string().min(1),
@@ -30,10 +32,9 @@ const formSchema = z.object({
 })
 
 interface ProductFormProps{
-    initialData:Product 
-    //& {images : ProductImage[]
-    //}
-     | null,
+    initialData:Product
+    & {images : ProductImage[]
+    }| null,
     categories: Category[]
 }
 
@@ -63,6 +64,7 @@ export const ProductForm:React.FC<ProductFormProps>=({
             price: parseFloat(String(initialData?.price)),
         } : {
             name: '',
+            images: [],
             description: '',
             price: 0,
             categoryId: '',
@@ -170,7 +172,29 @@ export const ProductForm:React.FC<ProductFormProps>=({
                                 </FormItem>
                             )}                            
                         />
-
+                    </div>
+                    <div className="grid grid-cols-1 gap-8">
+                        
+                        <FormField
+                            control={form.control}
+                            name="images"
+                            render={({ field })=>(
+                                <FormItem>
+                                    <FormLabel>Images</FormLabel>
+                                    <FormControl>
+                                        <ImageUpload 
+                                        value={field.value.map((image)=>image.url)}
+                                        disabled={loading}
+                                        onChange={(url)=> field.onChange([...field.value,{url}])}
+                                        onRemove={(url)=>field.onChange([...field.value.filter((current)=>current.url !== url)])}
+                                        />
+                                    </FormControl>
+                                    <FormMessage/>
+                                </FormItem>
+                            )}                            
+                        />
+                    </div>
+                    <div className="grid grid-cols-3 gap-8">
                         <FormField
                             control={form.control}
                             name="price"
