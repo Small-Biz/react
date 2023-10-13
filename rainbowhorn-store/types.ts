@@ -10,6 +10,12 @@ export interface Category{
     billboard: Billboard;   
 }
 
+export interface Blog{
+    id: string;
+    title:string;
+    thumbnail:string;
+}
+
 export interface Product{
     id: string;
     categoryId: string;

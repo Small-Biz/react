@@ -20,6 +20,7 @@ import { Separator } from "@/components/ui/separator";
 import Category from "@/data/category";
 
 const formSchema = z.object({
+    id: z.string(),
     name: z.string().min(1),
     imageUrl: z.string().min(1)
 })
@@ -49,6 +50,7 @@ export const CategoryForm:React.FC<CategoryFormProps>=({
     const form=useForm<CategoryFormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: initialData || {
+            id: '',
             name: '',
             imageUrl: ''
         }
@@ -119,6 +121,20 @@ export const CategoryForm:React.FC<CategoryFormProps>=({
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                     
+                    <FormField
+                        control={form.control}
+                        name="id"
+                        render={({ field })=>(
+                            <FormItem>
+                                <FormLabel>Category ID</FormLabel>
+                                <FormControl>
+                                    <Input disabled {...field}/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )}                            
+                    />
+
                     <FormField
                         control={form.control}
                         name="imageUrl"

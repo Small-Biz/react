@@ -5,7 +5,7 @@ import { ProductColumn } from "./components/columns";
 import Product from "@/data/product";
 import { formatter } from "@/lib/utils";
 
-const BillboardsPage= async({
+const ProductsPage= async({
     params
 }:{
     params: {storeId:string}
@@ -35,4 +35,4 @@ const BillboardsPage= async({
     )
 }
 
-export default BillboardsPage;
+export default ProductsPage;

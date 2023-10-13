@@ -2,6 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { CellAction } from "./cell-action"
+import { CellUpdate } from "./cell-update"
+import { CellDelete } from "./cell-delete"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -25,6 +27,10 @@ export const columns: ColumnDef<ProductColumn>[] = [
     header: "Name",
   },
   {
+    accessorKey: "category",
+    header: "Category",
+  },
+  {
     accessorKey: "description",
     header: "Description",
   },
@@ -37,15 +43,11 @@ export const columns: ColumnDef<ProductColumn>[] = [
     header: "Stock",
   },
   {
-    accessorKey: "createdAt",
-    header: "Created Time",
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Last Updated Time",
+    id: "action",
+    cell: ({row}) => <CellUpdate data={row.original}/>
   },
   {
     id: "action",
-    cell: ({row}) => <CellAction data={row.original}/>
-  },
+    cell: ({row}) => <CellDelete data={row.original}/>
+  },  
 ]

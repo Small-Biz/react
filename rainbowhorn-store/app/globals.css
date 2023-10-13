@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.blog_header{
+    font-weight: bold;
+    color: #D64394;
+}
+
+.blog_subheader{
+    font-weight: bold;
+    color: #D64394;
+}
+

@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { ImagePlus, Trash } from 'lucide-react';
 
 interface ImageUploadProps {
+  folder: string;
   disabled?: boolean;
   onChange: (value: string) => void;
   onRemove: (value: string) => void;
@@ -15,6 +16,7 @@ interface ImageUploadProps {
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
+  folder,
   disabled,
   onChange,
   onRemove,
@@ -33,6 +35,15 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   if (!isMounted) {
     return null;
   }
+
+  var preset="czsbltdd";
+
+  if (folder === "products"){
+    preset="cpx7ivqa";
+  }else if (folder === "billboards"){
+    preset="gm1vkwxk";    
+  }
+
 
   return ( 
     <div>
@@ -53,7 +64,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           </div>
         ))}
       </div>
-      <CldUploadWidget onUpload={onUpload} uploadPreset="czsbltdd">
+      <CldUploadWidget onUpload={onUpload} uploadPreset={preset}>
         {({ open }) => {
           const onClick = () => {
             open();
