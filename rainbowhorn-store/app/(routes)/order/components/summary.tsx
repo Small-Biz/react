@@ -1,12 +1,8 @@
 "use client"
 
-import axios from "axios"
-import { useRouter, useSearchParams } from "next/navigation"
-import { toast } from "react-hot-toast"
-
+import { useRouter } from "next/navigation"
 import Button from "@/components/ui/button"
 import Currency from "@/components/ui/currency"
-import useCart from "@/hooks/use-cart"
 import { Order } from "@/types"
 
 interface SummaryProps{

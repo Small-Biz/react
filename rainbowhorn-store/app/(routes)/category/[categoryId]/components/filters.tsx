@@ -43,7 +43,7 @@ const Filter: React.FC<FilterProp> = ({
             <hr className="my-4"/>
             <div className="flex flex-wrap gap-2">
                 {data.map((filter) => (
-                    <div className="flex items-center">
+                    <div className="flex items-center" key={filter}>
                         <Button
                             className={cn(
                                 "rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-200",
