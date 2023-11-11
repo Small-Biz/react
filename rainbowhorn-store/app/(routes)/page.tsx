@@ -1,4 +1,5 @@
 import getBillboard from "@/actions/get-billboard";
+import getFeaturedProducts from "@/actions/get-featured";
 import getProducts from "@/actions/get-products";
 import Billboard from "@/components/billboard";
 import ProductList from "@/components/product-list";
@@ -9,7 +10,7 @@ export const revalidate = 0;
 const HomePage = async() =>{
 
   const billboard = await getBillboard("5");
-  const productList = await getProducts("6");
+  const productList = await getFeaturedProducts();
 
   return (
     <Container>

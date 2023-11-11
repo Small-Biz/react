@@ -2,13 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+.blog_title{
+    font-weight: bold;
+    font-size: xx-large;
+    color: #D64394;    
+}
+
 .blog_header{
     font-weight: bold;
-    color: #D64394;
+    font-size: x-large;
+    color: #ee7ebc;
+    margin-top: 20px;
 }
 
-.blog_subheader{
-    font-weight: bold;
-    color: #D64394;
+.blog_content{
+    font-size: medium;
 }
 
+.blog_picture_left{
+    height: 14rem;
+    float:left;
+    margin-right: 30px;
+}
+
+.blog_picture_right{
+    height: 14rem;
+    float:right;
+    margin-left: 30px;
+}
+
+.blog_banner_center{
+}

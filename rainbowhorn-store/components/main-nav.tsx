@@ -19,16 +19,16 @@ import { ShoppingBag } from "lucide-react";
 
   const components: { title: string; href: string; description: string }[] = [
     {
-      title: "What is unicorn",
-      href: "/what_is_unicorn",
-      description:
-        "A modal dialog that interrupts the user with important content and expects a response.",
-    },
-    {
-      title: "Does unicorn real",
+      title: "Existence and mythological of unicorns",
       href: "/blog/test",
       description:
-        "For sighted users to preview content available behind a link.",
+        "While the existence of unicorns is highly improbable, it's important to clarify that unicorns...",
+    },
+    {
+      title: "Cartoon with unicorn as characters",
+      href: "/blog/cartoon",
+      description:
+        "My Little Pony, Friendship Is Magic, The Last Unicron, Despicable Me",
     },
     {
       title: "Progress",

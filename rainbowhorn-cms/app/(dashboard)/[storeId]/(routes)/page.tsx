@@ -123,7 +123,7 @@ const DashboardPage:React.FC<DashboardPageProps>= async ({
                         <CardTitle>Overview</CardTitle>
                     </CardHeader>
                     <CardContent className="pl-2">
-                        <Overview data={graphRevenue} data2={data2} />
+                        <Overview data={graphRevenue} />
                     </CardContent>
                 </Card>
             </div>
